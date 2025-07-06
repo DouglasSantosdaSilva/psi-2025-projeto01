@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!--Edição do conteúdo da página "Jogadores"-->
+
+{% block content %}
+<section class="home container" style="background-image: url('{% static 'img/img-principal.jpg' %}');">
+    <div class="home_text">
+        <a href="{% url 'jogadores' %}"><h1>Jogadores</h1></a>
+    </div>
+</section>
+
+
+
+<div class="grid">
+{% for jogador in jogadores %}
+    <section class="jogador container">
+        <div class="jogador-caixa">
+            <img src="{% static jogador.foto %}" alt="{{ jogador.nome }}" class="jogador-img"> 
+            <div class="card-body">
+                <h1 class="jogador-titulo">{{ jogador.nome }}</h5>
+                <div class="jogador-text">
+                  Idade: {{ jogador.idade }}<br>
+                  Local de Nascimento: {{ jogador.nascimento }}<br>
+                  Posição: {{ jogador.posicao }}<br>
+                </div>
+              </div>
+        </div>
+    </section>
+{% endfor %}
+</div>
+
+{% endblock %}
