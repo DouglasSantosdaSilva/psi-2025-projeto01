@@ -33,11 +33,12 @@
 
     <!--Conteúdo-->
     {% block content %}
+    <div class="home_text">
+        <h1>Flamengo</h1>
+        <h3>O melhor time do Brasil!</h3>
+    </div>
     <section class="home container" style="background-image: url('{% static 'img/img-principal.jpg' %}');">
-        <div class="home_text">
-            <a href="{% url 'index' %}"><h1>Flamengo</h1></a>
-            <a href="{% url 'index' %}"><h3>O melhor time do Brasil!</h3></a>
-        </div>
+        
     </section>
 
     <h1 class="titulo">Principais notícias</h1>
