@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ jogador.nome }}</h1>
+  <p>Idade: {{ jogador.idade }}</p>
+  <p>Posição: {{ jogador.posicao }}</p>
+  <p>Nascimento: {{ jogador.nascimento }}</p>
+  <p>Cidade: {{ jogador.cidade }}</p>
+  <img src="{{ jogador.foto.url }}" alt="{{ jogador.nome }}">
+  <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn">Editar</a>
+  <a href="{% url 'excluir_jogador' pk=jogador.pk %}" class="btn">Excluir</a>
+  <a href="{% url 'lista_jogadores' %}" class="btn-outline">Voltar</a>
+{% endblock %}

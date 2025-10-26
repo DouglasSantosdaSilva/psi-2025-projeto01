@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <h1>Jogadores</h1>
+  <a href="{% url 'criar_jogador' %}" class="btn">Novo Jogador</a>
+  <ul>
+      {% for jogador in jogadores %}
+          <li>
+              <a href="{% url 'detalhe_jogador' pk=jogador.pk %}">{{ jogador.nome }}</a>
+              <a href="{% url 'editar_jogador' pk=jogador.pk %}">Editar</a>
+              <a href="{% url 'excluir_jogador' pk=jogador.pk %}">Excluir</a>
+          </li>
+      {% endfor %}
+  </ul>
+{% endblock %}
