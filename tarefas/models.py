@@ -5,7 +5,8 @@ class Jogador(models.Model):
     idade = models.PositiveIntegerField()
     posicao = models.CharField(max_length=50)
     nascimento = models.CharField(max_length=100)
-    foto = models.ImageField(upload_to='jogadores/')
+    cidade = models.CharField(max_length=100)
+    foto = models.ImageField(upload_to='jogadores/', blank=True, null=True)
 
     def __str__(self):
         return self.nome
