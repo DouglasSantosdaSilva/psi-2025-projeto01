@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'static/css/style.css' %}">
  <h1>Jogadores</h1>
-  <a href="{% url 'criar_jogador' %}" class="btn">Novo Jogador</a>
+  <a href="{% url 'criar_jogador' %}" class="btn add-jogador-btn">Novo Jogador</a>
   <ul>
       {% for jogador in jogadores %}
           <li>

@@ -1,13 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
-<h1>{{ jogador.nome }}</h1>
-  <p>Idade: {{ jogador.idade }}</p>
-  <p>Posição: {{ jogador.posicao }}</p>
-  <p>Nascimento: {{ jogador.nascimento }}</p>
-  <p>Cidade: {{ jogador.cidade }}</p>
-  <img src="{{ jogador.foto.url }}" alt="{{ jogador.nome }}">
-  <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn">Editar</a>
-  <a href="{% url 'excluir_jogador' pk=jogador.pk %}" class="btn">Excluir</a>
-  <a href="{% url 'lista_jogadores' %}" class="btn-outline">Voltar</a>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<div class="detalhe-container">
+    <div class="detalhe-card">
+        <img src="{{ jogador.foto.url }}" alt="{{ jogador.nome }}" class="detalhe-img">
+        <h2 class="detalhe-nome">{{ jogador.nome }}</h2>
+        <p><strong>Idade:</strong> {{ jogador.idade }}</p>
+        <p><strong>Posição:</strong> {{ jogador.posicao }}</p>
+        <p><strong>Nascimento:</strong> {{ jogador.nascimento }}</p>
+        <p><strong>Cidade:</strong> {{ jogador.cidade }}</p>
+
+        <div class="detalhe-actions">
+            <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn">Editar</a>
+            <a href="{% url 'excluir_jogador' pk=jogador.pk %}" class="btn-outline">Excluir</a>
+            <a href="{% url 'lista_jogadores' %}" class="btn-outline">Voltar</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
