@@ -1,18 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
-<link rel="stylesheet" href="{% static 'static/css/style.css' %}">
- <h1>Jogadores</h1>
+<link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+<div class="container-pagina-jogadores">
+  <h1>Jogadores</h1>
   <a href="{% url 'criar_jogador' %}" class="btn add-jogador-btn">Novo Jogador</a>
-  <ul>
-      {% for jogador in jogadores %}
-          <li>
-              <a href="{% url 'detalhe_jogador' pk=jogador.pk %}">{{ jogador.nome }}</a>
-              <a href="{% url 'editar_jogador' pk=jogador.pk %}">Editar</a>
-              <a href="{% url 'excluir_jogador' pk=jogador.pk %}">Excluir</a>
-          </li>
-      {% endfor %}
-  </ul>
-{% endblock %}
+
+  <div class="card-container">
+    
+    {% for jogador in jogadores %}
+      
+      <div class="card-jogador">
+        
+        <div class="card-imagem">
+          {% if jogador.foto %}
+            <img src="{{ jogador.foto.url }}" alt="Foto de {{ jogador.nome }}">
+          {% else %}
+            <img src="{% static 'img/placeholder_escudo.png' %}" alt="Sem foto" class="placeholder-imagem">
+          {% endif %}
+        </div>
+
+        <div class="card-info">
+          <h2 class="card-nome">
+            <a href="{% url 'detalhe_jogador' pk=jogador.pk %}">{{ jogador.nome }}</a>
+          </h2>
+          <p class="card-detalhe">{{ jogador.posicao }}</p>
+          <p class="card-detalhe">{{ jogador.idade }} anos</p>
+        </div>
+
+        <div class="card-acoes">
+          <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn-outline">Editar</a>
+          <a href="{% url 'excluir_jogador' pk=jogador.pk %}" class="btn">Excluir</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>Nenhum jogador cadastrado ainda.</p>
+    {% endfor %}
+  
+  </div> </div> {% endblock %}
