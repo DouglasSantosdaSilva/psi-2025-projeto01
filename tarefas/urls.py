@@ -10,4 +10,5 @@ urlpatterns = [
     path('jogadores/<int:pk>/', views.detalhe_jogador, name='detalhe_jogador'),
     path('jogadores/<int:pk>/editar/', views.editar_jogador, name='editar_jogador'),
     path('jogadores/<int:pk>/excluir/', views.excluir_jogador, name='excluir_jogador'),
+    path('cadastro/', views.cadastro, name='cadastro'), # Agora o nome 'cadastro' existirá!
 ]

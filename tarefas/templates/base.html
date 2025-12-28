@@ -11,17 +11,32 @@
 </head>
 <body>
     {% block nav %}
-    <!--Cabeçalho-->
     <header class="header">
-        <!--Logo-->
         <div class="nav container">
             <a href="{% url 'index' %}" class="logo"> <img src="{% static 'img/logo-flamengo.png' %}" alt="Logo do flamengo" class="logo_img"> </a>
-            <!--Páginas-->
-            <nav class="navbar">
-                <a href="{% url 'index' %}">Início</a>
-                <a href="{% url 'lista_jogadores' %}">Jogadores</a>
-                <a href="{% url 'sobre' %}">Sobre</a>
-            </nav>
+            
+           <nav class="navbar">
+    <a href="{% url 'index' %}">Início</a>
+    <a href="{% url 'lista_jogadores' %}">Jogadores</a>
+    <a href="{% url 'sobre' %}">Sobre</a>
+
+    {% if user.is_authenticated %}
+        <span style="color: #ff0000 !important; margin-left: 15px; font-weight: 500;">
+            <i class='bx bxs-user-circle'></i> {{ user.username }}
+        </span>
+        
+        <form action="{% url 'logout' %}" method="post" style="display: inline; margin-left: 10px;">
+            {% csrf_token %}
+            <button type="submit" style="background: #ff0000; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-family: inherit; font-weight: bold;">
+                Sair
+            </button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" style="margin-left: 15px;">Entrar</a>
+        <a href="{% url 'cadastro' %}">Cadastrar</a>
+    {% endif %}
+</nav>
+
             <div class="social">
                 <a href="https://www.instagram.com/flamengo/" target="_blank"><i class="bx bxl-instagram"></i></a>
                 <a href="https://www.facebook.com/FlamengoOficial/?locale=pt_BR" target="_blank"><i class="bx bxl-facebook"></i></a>
@@ -31,20 +46,14 @@
     </header>
     {% endblock %}
 
-    <!--Conteúdo-->
     {% block content %}
     <div class="home_text">
-        <center>
-            <h1>Flamengo</h1>
-        </center>
+        <center><h1>Flamengo</h1></center>
         <h3>O melhor time do Brasil!</h3>
     </div>
-    <section class="home container" style="background-image: url('{% static 'img/img-principal.jpg' %}');">
-        
-    </section>
+    <section class="home container" style="background-image: url('{% static 'img/img-principal.jpg' %}');"></section>
 
     <h1 class="titulo">Principais notícias</h1>
-
     <section class="post container">
         <div class="post-caixa">
             <img src="{% static 'img/img-01-principal.webp' %}" alt="Foto da torcida do flamengo" class="post-img"> 
@@ -60,9 +69,8 @@
         </div>
     </section>
 
-     <h1 class="titulo">Fotos</h1>  
-
-      <section class="post container">
+    <h1 class="titulo">Fotos</h1>  
+    <section class="post container">
         <div class="post-caixa">
             <img src="{% static 'img/img-04-fotos.webp' %}" alt="Foto do time femenino" class="post-img"> 
             <a href="https://www.flamengo.com.br/fotos/futebol-feminino/flamengo-x-fluminense-campeonato-brasileiro-u20f-gavea-03-07-2025-foto--paula-reis---flamengo" class="post-titulo">Time femenino</a>
@@ -78,7 +86,7 @@
     </section>
     {% endblock %}
 
-     <div class="footer container">
+    <div class="footer container">
         <p>Copyright © 2024.</p>
         <div class="footer_text">
             <p>Produzido por Francisco Douglas dos Santos</p>
@@ -86,5 +94,3 @@
     </div>
 </body>
 </html>
-    
-        
