@@ -260,380 +260,52 @@ header.header {
 }
 
 
-/* =================== BOTÕES =================== */
-.btn {
-    display: inline-block;
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--flamengo-white);
-    background: linear-gradient(135deg, var(--flamengo-red), var(--flamengo-black));
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.btn:hover {
-    background: linear-gradient(135deg, var(--flamengo-black), var(--flamengo-red));
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-}
-
-.btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--flamengo-red);
-    border: 2px solid var(--flamengo-red);
-}
-
-.btn-outline:hover {
-    background: var(--flamengo-red);
-    color: var(--flamengo-white);
-    transform: translateY(-2px);
-}
-
-/* =================== FORMULÁRIOS =================== */
-form {
-    background: linear-gradient(to bottom, var(--flamengo-white), #ffe5e5);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    max-width: 500px;
-    margin: 20px auto;
+/* Container principal das ações */
+.card-acoes-final {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="number"],
-form input[type="file"],
-form textarea,
-form select {
-    padding: 10px 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    outline: none;
-    width: 100%;
-    transition: all 0.3s ease;
-}
-
-form input:focus,
-form textarea:focus,
-form select:focus {
-    border-color: var(--flamengo-red);
-    box-shadow: 0 0 10px var(--flamengo-red);
-}
-
-.form-actions {
-    display: flex;
-    justify-content: center;
     gap: 10px;
-    margin-top: 15px;
+    padding: 15px;
 }
 
-.form-actions .btn,
-.form-actions .btn-outline {
-    min-width: 100px;
-}
-/* =================================== */
-/* =  ESTILOS DOS CARDS DE JOGADOR   = */
-/* =================================== */
-
-/* Ajusta o container da página de jogadores */
-.container-pagina-jogadores {
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px 0;
-}
-
-/* Este é o container que cria a grade (Grid) de cards.
-  Ele é o substituto da antiga <ul>
-*/
-.card-container {
-  display: grid;
-  /* Cria colunas responsivas: tenta encaixar colunas de 280px */
-  grid-template-columns: repeat(auto-fill, 280px);
-  justify-content: center;
-  gap: 24px; /* Espaçamento entre os cards */
-  max-width: 1200px;
-  margin: 20px auto; /* Centraliza a grade */
-}
-
-/* O "cardzinho" individual */
-.card-jogador {
-  background: var(--bg-color); /* Usando sua variável */
-  /* Usando a sombra padrão do seu .jogadores */
-  box-shadow: 0 4px 14px rgba(0,0,0,0.1); 
-  border-radius: 0.5rem; /* Usando seu border-radius padrão */
-  overflow: hidden; /* Garante que a imagem não vaze */
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card-jogador:hover {
-  transform: translateY(-5px); /* Efeito de "levantar" o card */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25); /* Sombra mais forte no hover */
-}
-
-/* 1. A IMAGEM */
-.card-imagem {
-  width: 100%;
-  height: 250px; /* Altura fixa para a imagem */
-  background-color: #f4f4f4; /* Cor de fundo caso a imagem falhe */
-}
-
-.card-imagem img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Faz a imagem cobrir o espaço sem distorcer */
-}
-/* Imagem placeholder (caso o jogador não tenha foto) */
-.card-imagem img.placeholder-imagem {
-  object-fit: contain; /* Para o escudo não distorcer */
-  padding: 15px; /* Um respiro para o escudo */
-}
-
-
-/* 2. AS INFORMAÇÕES */
-.card-info {
-  padding: 20px;
-  flex-grow: 1; /* Empurra os botões para baixo */
-}
-
-.card-nome {
-  margin-top: 0;
-  margin-bottom: 10px;
-  /* Usando o mesmo tamanho do seu .jogador-titulo */
-  font-size: 1.3rem; 
-}
-
-.card-nome a {
-  text-decoration: none;
-  color: var(--titulo-color); /* Usando sua variável */
-  font-weight: 600;
-}
-
-.card-nome a:hover {
-  color: var(--second-color); /* Usando sua variável */
-}
-
-.card-detalhe {
-  font-size: 1rem;
-  color: var(--text-color); /* Usando sua variável */
-  margin: 5px 0;
-}
-
-/* 3. AS AÇÕES (BOTÕES) */
-.card-acoes {
-  padding: 15px 20px;
-  border-top: 1px solid #f0f0f0;
-  display: flex;
-  gap: 10px; /* Espaço entre os botões */
-  justify-content: center; /* Centraliza os botões */
-}
-
-/* Ajuste para seus botões dentro do card */
-.card-acoes .btn,
-.card-acoes .btn-outline {
-  /* Faz os botões dividirem o espaço */
-  flex-grow: 1;
-  text-align: center;
-  /* Remove margens que eles possam ter */
-  margin: 0; 
-}
-
-/* =================== DETALHE DO JOGADOR =================== */
-.detalhe-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 50px 20px;
-}
-
-.detalhe-card {
-    background: linear-gradient(to bottom, var(--flamengo-white), #ffe5e5);
-    border-radius: 12px;
-    padding: 30px;
-    max-width: 500px;
+/* Força os botões a dividirem o espaço em 50% cada */
+.botoes-lado-a-lado {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
     width: 100%;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    text-align: center;
 }
-.detalhe-img {
+
+/* Remove o fundo rosa, bordas e padding do formulário de excluir */
+.form-excluir-inline {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    display: block !important;
     width: 100%;
-    height: auto;  /* altura automática, mantém proporção */
-    max-width: 100%;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    object-fit: contain; /* mantém toda a imagem visível */
 }
 
-
-.detalhe-nome {
-    color: var(--flamengo-black);
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
-
-.detalhe-card p {
-    font-size: 1rem;
-    margin: 5px 0;
-    color: var(--titulo-color);
-}
-
-.detalhe-actions {
-    display: flex;
+/* Estilização idêntica para o Link e o Botão */
+.botoes-lado-a-lado .btn, 
+.form-excluir-inline .btn-excluir {
+    width: 100% !important;
+    height: 45px !important;
+    display: flex !important;
+    align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    margin: 0 !important;
+    border: none !important; /* REMOVE A BORDA QUE VOCÊ QUERIA */
+    font-size: 0.85rem;
+    cursor: pointer;
 }
 
-.detalhe-actions .btn,
-.detalhe-actions .btn-outline {
-    min-width: 100px;
-}
-
-/* =================================== */
-/* =  ESTILOS DOS CARDS DE JOGADOR   = */
-/* =================================== */
-
-/* Ajusta o container da página de jogadores */
-.container-pagina-jogadores {
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px 0;
-}
-
-/* O CONTAINER QUE CRIA A GRADE E CENTRALIZA
-*/
-.card-container {
-  display: grid;
-  /* Colunas de 280px fixas */
-  grid-template-columns: repeat(auto-fit, 280px);
-  /* Centraliza o bloco de colunas */
-  justify-content: center;
-  gap: 24px;
-  max-width: 1200px;
-  margin: 20px auto;
-}
-
-/* O CARD INDIVIDUAL (COM O ESTILO DA SUA LISTA ANTIGA)
-*/
-.card-jogador {
-  /* O fundo gradiente da sua lista antiga */
-  background: linear-gradient(145deg, var(--flamengo-white), #ffe5e5);
-  
-  /* A sombra da sua lista antiga */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  
-  /* O border-radius da sua lista antiga */
-  border-radius: 12px;
-
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  
-  /* A transição da sua lista antiga */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* O EFEITO HOVER DA SUA LISTA ANTIGA
-*/
-.card-jogador:hover {
-  /* O 'levantar' + 'zoom' da sua lista antiga */
-  transform: translateY(-5px) scale(1.02);
-  
-  /* A sombra de hover da sua lista antiga */
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-}
-
-/* 1. A IMAGEM */
-.card-imagem {
-  width: 100%;
-  height: 250px;
-  background-color: #f4f4f4;
-}
-
-.card-imagem img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.card-imagem img.placeholder-imagem {
-  object-fit: contain;
-  padding: 15px;
-}
-
-
-/* 2. AS INFORMAÇÕES */
-.card-info {
-  padding: 20px;
-  flex-grow: 1; /* Empurra os botões para baixo */
-}
-
-.card-nome {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 1.3rem; 
-}
-
-.card-nome a {
-  text-decoration: none;
-  color: var(--titulo-color);
-  font-weight: 600;
-}
-
-.card-nome a:hover {
-  color: var(--second-color);
-}
-
-.card-detalhe {
-  font-size: 1rem;
-  color: var(--text-color);
-  margin: 5px 0;
-}
-
-/* 3. AS AÇÕES (BOTÕES) */
-.card-acoes {
-  padding: 15px 20px;
-  border-top: 1px solid #f0f0f0;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.card-acoes .btn,
-.card-acoes .btn-outline {
-  flex-grow: 1;
-  text-align: center;
-  margin: 0; 
-}
-
-/* =================================== */
-/* = CENTRALIZA O BOTÃO 'NOVO JOGADOR' = */
-/* =================================== */
-
-.add-jogador-btn {
-  /* 1. Transforma o link em um bloco */
-  display: block;
-  
-  /* 2. O 'auto' nas margens laterais faz a centralização */
-  margin: 20px auto; 
-  
-  /* 3. Define uma largura máxima para o botão */
-  max-width: 200px;
-  
-  /* 4. Garante que o texto dentro dele também esteja centralizado */
-  text-align: center; 
+/* Ajuste do botão de Detalhes (largura total) */
+.btn-full {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

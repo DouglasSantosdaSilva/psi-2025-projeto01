@@ -31,6 +31,8 @@ def criar_jogador(request):
     if request.method == 'POST':
         form = JogadorForm(request.POST, request.FILES)
         if form.is_valid():
+            jogador = form.save(commit=False)
+            jogador.usuario = request.user
             form.save()
             return redirect('lista_jogadores')
     else:
@@ -40,6 +42,10 @@ def criar_jogador(request):
 @login_required
 def editar_jogador(request, pk):
     jogador = get_object_or_404(Jogador, pk=pk)
+    
+    if jogador.usuario != request.user:
+        return redirect('lista_jogadores')
+    
     if request.method == 'POST':
         form = JogadorForm(request.POST, request.FILES, instance=jogador)
         if form.is_valid():
@@ -52,6 +58,10 @@ def editar_jogador(request, pk):
 @login_required
 def excluir_jogador(request, pk):
     jogador = get_object_or_404(Jogador, pk=pk)
+    
+    if jogador.usuario != request.user:
+        return redirect('lista_jogadores')
+    
     if request.method == 'POST':
         jogador.delete()
         return redirect('lista_jogadores')
