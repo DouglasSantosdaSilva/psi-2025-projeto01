@@ -19,6 +19,14 @@
     --text-color: #5E6A83;
 }
 
+/* =================== GERAL / CONTAINERS =================== */
+.container {
+    max-width: 1068px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+}
+
 /* =================== HEADER =================== */
 header.header {
     background: var(--bg-color);
@@ -33,16 +41,17 @@ header.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1068px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 .logo_img {
     width: 40px;
     height: 40px;
     object-fit: contain;
-    cursor: pointer;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
 }
 
 .navbar a {
@@ -54,10 +63,6 @@ header.header {
     transition: color 0.3s ease;
 }
 
-.navbar a:first-child {
-    margin-left: 0;
-}
-
 .navbar a:hover {
     color: var(--second-color);
 }
@@ -66,246 +71,135 @@ header.header {
     font-size: 1.4rem;
     margin-left: 15px;
     color: var(--text-color);
-    transition: color 0.3s ease;
 }
 
-.social .bx:hover {
-    color: var(--second-color);
+/* =================== BOTÕES (O VERMELHO VOLTOU) =================== */
+.btn {
+    background-color: var(--flamengo-red) !important;
+    color: white !important;
+    text-decoration: none !important;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-@media (max-width: 768px) {
-    .nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.btn:hover {
+    background-color: #b30500 !important;
+}
 
-    .navbar {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .navbar a {
-        margin: 10px 0;
-    }
+.add-jogador-btn {
+    display: block;
+    margin: 20px auto;
+    max-width: 200px;
+    text-align: center;
 }
 
 /* =================== HOME =================== */
 .home {
-    margin-top: 5rem;
+    margin-top: 2rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     height: 440px;
     border-radius: 1.5rem;
-    display: flex;
-    align-items: center;
 }
 
 .home_text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
+    padding: 40px 0 20px;
     text-align: center;
 }
 
 .home_text h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--titulo-color);
-    text-align: center;
+    font-size: 3rem;
+    color: var(--flamengo-red);
 }
 
-.home_text h3 {
-    font-size: large;
-    color: var(--titulo-color);
-}
-
-.home_text a {
-    text-decoration: none;
-}
-
-/* =================== POSTS =================== */
+/* =================== POSTS / CARDS =================== */
 .titulo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
+    text-align: center;
+    padding: 50px 0 20px;
     color: var(--titulo-color);
-    font-size: 1.5rem;
 }
 
 .post {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, auto));
-    justify-content: center;
     gap: 1.5rem;
-}
-
-.post-img {
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    object-fit: contain;
-    object-position: center;
-    border-radius: 0.5rem;
+    margin-bottom: 30px;
 }
 
 .post-caixa {
     background: var(--bg-color);
     padding: 15px;
     border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.post-titulo {
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--titulo-color);
-}
-
-.post-titulo:hover {
-    color: var(--second-color);
-    transition: 0.8s;
-}
-
-/* =================== FOOTER =================== */
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 50px 0;
-}
-
-/* =================== SOBRE =================== */
-.foto img {
-    width: 700px;
-    height: 400px;
-    margin-left: 30%;
-    margin-top: 3%;
-}
-
-.sobre p {
-    display: flex;
-    font-size: 1.2rem;
-    text-align: justify;
-    margin: 0 20%;
-    padding: 50px 0;
-}
-
-/* =================== JOGADORES =================== */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(530px, auto));
-    justify-content: center;
-    gap: 1.5rem;
-}
-
-.jogadores {
-    background: var(--bg-color);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 15px;
-    border-radius: 0.5rem;
-}
-
-.jogador {
-    padding: 80px 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, auto));
-    justify-content: center;
-}
-
-.jogador-caixa {
-    background: var(--bg-color);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 15px;
-    border-radius: 0.5rem;
-}
-
-.jogador-img {
+.post-img {
     width: 100%;
-    height: 600px;
+    height: 200px;
     object-fit: cover;
-    object-position: center;
     border-radius: 0.5rem;
 }
 
-.jogador-titulo {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--titulo-color);
+/* =================== JOGADORES (LISTA) =================== */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 20px 0;
 }
 
-.jogador-text {
-    font-size: 0.9rem;
-    line-height: 1.5rem;
-    margin: 5px 0 5px;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
+.card-jogador {
+    background: white;
+    border-radius: 10px;
     overflow: hidden;
-}
-
-.add-jogador-btn {
-    display: block;        /* transforma em bloco */
-    margin: 20px auto;     /* centraliza horizontalmente */
-    text-align: center;    /* centraliza o texto */
-    max-width: 200px;      /* opcional: limita o tamanho do botão */
-}
-
-
-/* Container principal das ações */
-.card-acoes-final {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+}
+
+.card-imagem img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-nome a {
+    text-decoration: none;
+    color: var(--flamengo-black);
+    font-size: 1.4rem;
+}
+
+/* Ações dos cards */
+.card-acoes-final {
+    margin-top: auto;
+    border-top: 1px solid #eee;
     padding: 15px;
 }
 
-/* Força os botões a dividirem o espaço em 50% cada */
-.botoes-lado-a-lado {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    width: 100%;
+/* =================== TOASTR (MENSAGENS) =================== */
+#toast-container > .toast-success {
+    background-color: #28a745 !important;
 }
 
-/* Remove o fundo rosa, bordas e padding do formulário de excluir */
-.form-excluir-inline {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    display: block !important;
-    width: 100%;
+#toast-container > .toast-error {
+    background-color: var(--flamengo-red) !important;
 }
 
-/* Estilização idêntica para o Link e o Botão */
-.botoes-lado-a-lado .btn, 
-.form-excluir-inline .btn-excluir {
-    width: 100% !important;
-    height: 45px !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    margin: 0 !important;
-    border: none !important; /* REMOVE A BORDA QUE VOCÊ QUERIA */
-    font-size: 0.85rem;
-    cursor: pointer;
-}
-
-/* Ajuste do botão de Detalhes (largura total) */
-.btn-full {
-    width: 100%;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid #eee;
 }

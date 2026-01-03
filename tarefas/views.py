@@ -34,6 +34,7 @@ def criar_jogador(request):
             jogador = form.save(commit=False)
             jogador.usuario = request.user
             form.save()
+            messages.success(request, "Jogador cadastrado com sucesso!")
             return redirect('lista_jogadores')
     else:
         form = JogadorForm()
@@ -50,6 +51,7 @@ def editar_jogador(request, pk):
         form = JogadorForm(request.POST, request.FILES, instance=jogador)
         if form.is_valid():
             form.save()
+            messages.success(request, "Jogador atualizado com sucesso!")
             return redirect('detalhe_jogador', pk=jogador.pk)
     else:
         form = JogadorForm(instance=jogador)
@@ -64,6 +66,7 @@ def excluir_jogador(request, pk):
     
     if request.method == 'POST':
         jogador.delete()
+        messages.error(request, "Jogador removido com sucesso!")
         return redirect('lista_jogadores')
     return render(request, 'jogadores/excluir.html', {'jogador': jogador})
 

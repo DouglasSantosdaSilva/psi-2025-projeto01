@@ -2,56 +2,50 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static '/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <div class="container-pagina-jogadores">
-  <h1>Jogadores</h1>
-  <a href="{% url 'criar_jogador' %}" class="btn add-jogador-btn">Novo Jogador</a>
+    <h1>Jogadores</h1>
+    <a href="{% url 'criar_jogador' %}" class="btn add-jogador-btn">Novo Jogador</a>
 
-  <div class="card-container">
-    
-    {% for jogador in jogadores %}
-      
-     <div class="card-jogador">
-  <div class="card-imagem">
-    {% if jogador.foto %}
-      <img src="{{ jogador.foto.url }}" alt="Foto de {{ jogador.nome }}">
-    {% else %}
-      <img src="{% static 'img/placeholder_escudo.png' %}" alt="Sem foto" class="placeholder-imagem">
-    {% endif %}
-  </div>
+    <div class="card-container">
+        {% for jogador in jogadores %}
+            <div class="card-jogador">
+                <div class="card-imagem">
+                    {% if jogador.foto %}
+                        <img src="{{ jogador.foto.url }}" alt="Foto de {{ jogador.nome }}">
+                    {% else %}
+                        <img src="{% static 'img/placeholder_escudo.png' %}" alt="Sem foto" class="placeholder-imagem">
+                    {% endif %}
+                </div>
 
-  <div class="card-info">
-    <h2 class="card-nome">
-      <a href="{% url 'detalhe_jogador' pk=jogador.pk %}">{{ jogador.nome }}</a>
-    </h2>
-    <p class="card-detalhe"><strong>Posição:</strong> {{ jogador.posicao }}</p>
-    <p class="card-detalhe"><strong>Idade:</strong> {{ jogador.idade }} anos</p>
-  </div>
+                <div class="card-info">
+                    <h2 class="card-nome">
+                        <a href="{% url 'detalhe_jogador' pk=jogador.pk %}">{{ jogador.nome }}</a>
+                    </h2>
+                    <p class="card-detalhe"><strong>Posição:</strong> {{ jogador.posicao }}</p>
+                    <p class="card-detalhe"><strong>Idade:</strong> {{ jogador.idade }} anos</p>
+                </div>
 
- <div class="card-acoes-final" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; gap: 8px !important; padding: 15px !important; border-top: 1px solid rgba(0,0,0,0.1) !important; background: none !important; flex-wrap: wrap !important;">
-    
-    <a href="{% url 'detalhe_jogador' pk=jogador.pk %}" class="btn" style="width: auto !important; min-width: 100px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 35px !important; margin: 0 !important; font-size: 0.75rem !important; border-radius: 6px !important; padding: 0 10px !important; white-space: nowrap !important;">
-        Detalhes
-    </a>
+                <div class="card-acoes-final" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; gap: 8px !important; padding: 15px !important; border-top: 1px solid rgba(0,0,0,0.1) !important; background: none !important; flex-wrap: wrap !important;">
+                    <a href="{% url 'detalhe_jogador' pk=jogador.pk %}" class="btn" style="width: auto !important; min-width: 100px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 35px !important; margin: 0 !important; font-size: 0.75rem !important; border-radius: 6px !important; padding: 0 10px !important; white-space: nowrap !important;">
+                        Detalhes
+                    </a>
 
-    {% if jogador.usuario == user %}
-        <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn" style="width: auto !important; min-width: 70px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 35px !important; margin: 0 !important; font-size: 0.75rem !important; border-radius: 6px !important; padding: 0 10px !important; white-space: nowrap !important;">
-            Editar
-        </a>
-        
-        <form action="{% url 'excluir_jogador' pk=jogador.pk %}" method="post" style="margin: 0 !important; padding: 0 !important; background: none !important; box-shadow: none !important; border: none !important; display: inline-block !important;">
-            {% csrf_token %}
-            <button type="submit" class="btn" onclick="return confirm('Tem certeza?')" style="width: auto !important; min-width: 70px !important; height: 35px !important; border: none !important; margin: 0 !important; padding: 0 10px !important; font-size: 0.75rem !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; border-radius: 6px !important; white-space: nowrap !important;">
-                Excluir
-            </button>
-        </form>
-    {% endif %}
-</div>
-</div>
-  </div>
-    {% empty %}
-      <p>Nenhum jogador cadastrado ainda.</p>
-    {% endfor %}
-  
-  </div> </div> {% endblock %}
+                    {% if jogador.usuario == user %}
+                        <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn" style="width: auto !important; min-width: 70px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 35px !important; margin: 0 !important; font-size: 0.75rem !important; border-radius: 6px !important; padding: 0 10px !important; white-space: nowrap !important;">
+                            Editar
+                        </a>
+                        
+                        <form action="{% url 'excluir_jogador' pk=jogador.pk %}" method="post" style="margin: 0 !important; padding: 0 !important; background: none !important; box-shadow: none !important; border: none !important; display: inline-block !important;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn" onclick="return confirm('Tem certeza?')" style="width: auto !important; min-width: 70px !important; height: 35px !important; border: none !important; margin: 0 !important; padding: 0 10px !important; font-size: 0.75rem !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; border-radius: 6px !important; white-space: nowrap !important;">
+                                Excluir
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div> {% empty %}
+            <p>Nenhum jogador cadastrado ainda.</p>
+        {% endfor %}
+    </div> </div> {% endblock %}

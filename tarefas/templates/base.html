@@ -3,94 +3,104 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <title>{% block title %}Início - Flamengo{% endblock %}</title>
+    <title>{% block title %}Flamengo{% endblock %}</title>
 </head>
 <body>
-    {% block nav %}
     <header class="header">
         <div class="nav container">
-            <a href="{% url 'index' %}" class="logo"> <img src="{% static 'img/logo-flamengo.png' %}" alt="Logo do flamengo" class="logo_img"> </a>
-            
-           <nav class="navbar">
-    <a href="{% url 'index' %}">Início</a>
-    <a href="{% url 'lista_jogadores' %}">Jogadores</a>
-    <a href="{% url 'sobre' %}">Sobre</a>
-
-    {% if user.is_authenticated %}
-        <span style="color: #ff0000 !important; margin-left: 15px; font-weight: 500;">
-            <i class='bx bxs-user-circle'></i> {{ user.username }}
-        </span>
-        
-        <form action="{% url 'logout' %}" method="post" style="display: inline; margin-left: 10px;">
-            {% csrf_token %}
-            <button type="submit" style="background: #ff0000; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-family: inherit; font-weight: bold;">
-                Sair
-            </button>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}" style="margin-left: 15px;">Entrar</a>
-        <a href="{% url 'cadastro' %}">Cadastrar</a>
-    {% endif %}
-</nav>
-
+            <a href="{% url 'index' %}" class="logo"> 
+                <img src="{% static 'img/logo-flamengo.png' %}" alt="Logo" class="logo_img"> 
+            </a>
+            <nav class="navbar">
+                <a href="{% url 'index' %}">Início</a>
+                <a href="{% url 'lista_jogadores' %}">Jogadores</a>
+                <a href="{% url 'sobre' %}">Sobre</a>
+                {% if user.is_authenticated %}
+                    <span style="color: #ff0000; margin-left: 15px; font-weight: 500;">
+                        <i class='bx bxs-user-circle'></i> {{ user.username }}
+                    </span>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline; margin-left: 10px;">
+                        {% csrf_token %}
+                        <button type="submit" style="background: #ff0000; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Sair</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Entrar</a>
+                    <a href="{% url 'cadastro' %}">Cadastrar</a>
+                {% endif %}
+            </nav>
             <div class="social">
                 <a href="https://www.instagram.com/flamengo/" target="_blank"><i class="bx bxl-instagram"></i></a>
-                <a href="https://www.facebook.com/FlamengoOficial/?locale=pt_BR" target="_blank"><i class="bx bxl-facebook"></i></a>
-                <a href="https://x.com/flamengo_en" target="_blank"><i class="bx bxl-twitter"></i></a>
+                <a href="https://www.facebook.com/FlamengoOficial/" target="_blank"><i class="bx bxl-facebook"></i></a>
             </div>
         </div>
     </header>
-    {% endblock %}
 
-    {% block content %}
-    <div class="home_text">
-        <center><h1>Flamengo</h1></center>
-        <h3>O melhor time do Brasil!</h3>
-    </div>
-    <section class="home container" style="background-image: url('{% static 'img/img-principal.jpg' %}');"></section>
+    <main>
+        {% block content %}
+            <div class="home_text">
+                <center><h1>Flamengo</h1></center>
+                <h3>O melhor time do Brasil!</h3>
+            </div>
+            <section class="home container" style="background-image: url('{% static 'img/img-principal.jpg' %}'); height: 440px; background-size: cover;"></section>
 
-    <h1 class="titulo">Principais notícias</h1>
-    <section class="post container">
-        <div class="post-caixa">
-            <img src="{% static 'img/img-01-principal.webp' %}" alt="Foto da torcida do flamengo" class="post-img"> 
-            <a href="https://www.flamengo.com.br/noticias/futebol/flamengo-abre-vendas-antecipadas-para-cinco-jogos-no-maracana" class="post-titulo">Flamengo abre vendas antecipadas para cinco jogos no Maracanã</a>
-        </div>
-        <div class="post-caixa">
-            <img src="{% static 'img/img-02-principal.webp' %}" alt="Foto do jogador de basquete alexey borges" class="post-img"> 
-            <a href="https://www.flamengo.com.br/noticias/basquete/o-mvp-fica--alexey-borges-segue-no-flabasquete-para-a-temporada-25-26" class="post-titulo">O MVP fica! Alexey Borges segue no FlaBasquete para a temporada 25/26</a>
-        </div>
-        <div class="post-caixa">
-            <img src="{% static 'img/img-03-principal.webp' %}" alt="Foto dos torcedores" class="post-img"> 
-            <a href="https://www.flamengo.com.br/noticias/institucional/socios-torcedores-do-nacao-visitam-o-ninho-do-urubu--saiba-como-participar" class="post-titulo">Sócios-Torcedores do Nação visitam o Ninho do Urubu: saiba como participar</a>
-        </div>
-    </section>
+            <h1 class="titulo">Principais notícias</h1>
+            <section class="post container">
+                <div class="post-caixa">
+                    <img src="{% static 'img/img-01-principal.webp' %}" class="post-img"> 
+                    <a href="https://www.flamengo.com.br/noticias/futebol/flamengo-abre-vendas-antecipadas-para-cinco-jogos-no-maracana" class="post-titulo">Vendas para o Maracanã</a>
+                </div>
+                <div class="post-caixa">
+                    <img src="{% static 'img/img-02-principal.webp' %}" class="post-img"> 
+                    <a href="#" class="post-titulo">Alexey Borges segue no FlaBasquete</a>
+                </div>
+                <div class="post-caixa">
+                    <img src="{% static 'img/img-03-principal.webp' %}" class="post-img"> 
+                    <a href="#" class="post-titulo">Sócios visitam o Ninho do Urubu</a>
+                </div>
+            </section>
 
-    <h1 class="titulo">Fotos</h1>  
-    <section class="post container">
-        <div class="post-caixa">
-            <img src="{% static 'img/img-04-fotos.webp' %}" alt="Foto do time femenino" class="post-img"> 
-            <a href="https://www.flamengo.com.br/fotos/futebol-feminino/flamengo-x-fluminense-campeonato-brasileiro-u20f-gavea-03-07-2025-foto--paula-reis---flamengo" class="post-titulo">Time femenino</a>
-        </div>
-        <div class="post-caixa">
-            <img src="{% static 'img/img-05-fotos.webp' %}" alt="Foto de Cesar Cielo" class="post-img"> 
-            <a href="https://www.flamengo.com.br/fotos/natacao/cesar-cielo-visita-a-gavea-27-06-2025-foto--paula-reis---flamengo" class="post-titulo">César Cielo_Visita a gávea do Flamengo</a>
-        </div>
-        <div class="post-caixa">
-            <img src="{% static 'img/img-06-fotos.webp' %}" alt="Foto da jodadora do flamengo" class="post-img"> 
-            <a href="https://www.flamengo.com.br/fotos/futebol-feminino/flamengo-x-america-mg-campeonato-brasileiro-a1-luso-brasileiro-14-06-2025" class="post-titulo">Imagens do jogo do flamengo X américa</a>
-        </div>
-    </section>
-    {% endblock %}
+            <h1 class="titulo">Fotos</h1>  
+            <section class="post container">
+                <div class="post-caixa">
+                    <img src="{% static 'img/img-04-fotos.webp' %}" class="post-img"> 
+                    <a href="#" class="post-titulo">Time feminino</a>
+                </div>
+                <div class="post-caixa">
+                    <img src="{% static 'img/img-05-fotos.webp' %}" class="post-img"> 
+                    <a href="#" class="post-titulo">César Cielo na Gávea</a>
+                </div>
+                <div class="post-caixa">
+                    <img src="{% static 'img/img-06-fotos.webp' %}" class="post-img"> 
+                    <a href="#" class="post-titulo">Flamengo x América</a>
+                </div>
+            </section>
+        {% endblock %}
+    </main>
+    <footer class="footer container">
+        <p>Copyright © 2024. Produzido por Francisco Douglas</p>
+    </footer>
 
-    <div class="footer container">
-        <p>Copyright © 2024.</p>
-        <div class="footer_text">
-            <p>Produzido por Francisco Douglas dos Santos</p>
-        </div>
-    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+{% if messages %}
+    {% for message in messages %}
+        // Criar um pequeno atraso entre cada balão (opcional, mas ajuda a ver todos)
+        setTimeout(function() {
+            {% if message.tags == 'success' %}
+                toastr.success("{{ message|escapejs }}");
+            {% elif message.tags == 'error' or message.tags == 'danger' %}
+                toastr.error("{{ message|escapejs }}");
+            {% else %}
+                toastr.info("{{ message|escapejs }}");
+            {% endif %}
+        }, {{ forloop.counter0 }} * 500); // Meio segundo de diferença entre cada um
+    {% endfor %}
+{% endif %}
+    </script>
 </body>
 </html>
