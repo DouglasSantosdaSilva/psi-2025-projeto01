@@ -4,6 +4,7 @@ from .forms import JogadorForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 
@@ -80,3 +81,21 @@ def cadastro(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/cadastro.html', {'form': form})
+
+def jogador_json(request, pk):
+    try:
+        jogador = get_object_or_404(Jogador, pk=pk)
+        
+        # Criamos o dicionário manualmente para evitar erro de campos complexos
+        data = {
+            'nome': jogador.nome,
+            'posicao': jogador.posicao,
+            'idade': jogador.idade,
+            'cidade': jogador.cidade,
+            'nascimento': jogador.nascimento,
+            'foto_url': jogador.foto.url if jogador.foto else '/static/img/placeholder_escudo.png'
+        }
+        return JsonResponse(data)
+    except Exception as e:
+        # Se der erro, ele retorna o motivo no console do navegador
+        return JsonResponse({'error': str(e)}, status=500)

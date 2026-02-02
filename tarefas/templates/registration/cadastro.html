@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="auth-form-container">
     <h2>Criar nova conta</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn">Cadastrar</button>
     </form>
+    <p style="text-align: center; margin-top: 15px; font-size: 0.8rem;">
+        Já tem conta? <a href="{% url 'login' %}" style="color: var(--flamengo-red);">Faça login</a>
+    </p>
+</div>
 {% endblock %}

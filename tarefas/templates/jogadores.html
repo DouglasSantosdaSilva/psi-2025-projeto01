@@ -1,34 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<!--Edição do conteúdo da página "Jogadores"-->
-
 {% block content %}
 <div class="home_text">
     <h1>Jogadores</h1>
-    <h3>O melhor time do Brasil!</h3>
+    <h3>O elenco do Mengão</h3>
 </div>
+
 <section class="home container" style="background-image: url('{% static 'img/img-principal.jpg' %}');"></section>
 
+<div class="container-pagina-jogadores">
+    <a href="{% url 'criar_jogador' %}" class="btn add-jogador-btn">Novo Jogador</a>
 
-
-<div class="grid">
-{% for jogador in jogadores %}
-    <section class="jogador container">
-        <div class="jogador-caixa">
-            <img src="{{ jogador.foto.url }}" alt="{{ jogador.nome }}" class="jogador-img"> 
-            <div class="card-body">
-                <h1 class="jogador-titulo">{{ jogador.nome }}</h5>
-                <div class="jogador-text">
-                  Idade: {{ jogador.idade }}<br>
-                  Local de Nascimento: {{ jogador.nascimento }}<br>
-                  Cidade: {{ jogador.cidade }}<br>
-                  Posição: {{ jogador.posicao }}<br>
+    <div class="card-container">
+        {% for jogador in jogadores %}
+            <div class="card-jogador">
+                <div class="card-imagem">
+                    {% if jogador.foto %}
+                        <img src="{{ jogador.foto.url }}" alt="{{ jogador.nome }}">
+                    {% else %}
+                        <img src="{% static 'img/placeholder.png' %}" alt="Sem foto">
+                    {% endif %}
                 </div>
-              </div>
-        </div>
-    </section>
-{% endfor %}
-</div>
 
+                <div class="card-info">
+                    <h2 class="card-nome">
+                        <a href="{% url 'detalhe_jogador' pk=jogador.pk %}">{{ jogador.nome }}</a>
+                    </h2>
+                    <p><strong>Posição:</strong> {{ jogador.posicao }}</p>
+                    <p><strong>Idade:</strong> {{ jogador.idade }} anos</p>
+                </div>
+
+                <div class="card-acoes-final">
+                    <a href="{% url 'detalhe_jogador' pk=jogador.pk %}" class="btn">Ver Detalhes</a>
+                </div>
+            </div>
+        {% empty %}
+            <p style="text-align: center;">Nenhum jogador cadastrado.</p>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

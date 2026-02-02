@@ -2,11 +2,15 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-
 <div class="container-pagina-jogadores">
     <h1>Jogadores</h1>
     <a href="{% url 'criar_jogador' %}" class="btn add-jogador-btn">Novo Jogador</a>
+
+    <div id="painel-ajax" style="display: none; background: #f4f4f4; padding: 15px; border-left: 5px solid #c1272d; margin-bottom: 20px; border-radius: 8px;">
+        <h3 id="ajax-nome"></h3>
+        <p id="ajax-info"></p>
+        <button onclick="document.getElementById('painel-ajax').style.display='none'" style="cursor:pointer; background:none; border:none; color:red; font-weight:bold;">[ Fechar ]</button>
+    </div>
 
     <div class="card-container">
         {% for jogador in jogadores %}
@@ -15,7 +19,7 @@
                     {% if jogador.foto %}
                         <img src="{{ jogador.foto.url }}" alt="Foto de {{ jogador.nome }}">
                     {% else %}
-                        <img src="{% static 'img/placeholder_escudo.png' %}" alt="Sem foto" class="placeholder-imagem">
+                        <img src="{% static 'img/placeholder_escudo.png' %}" alt="Sem foto">
                     {% endif %}
                 </div>
 
@@ -27,25 +31,59 @@
                     <p class="card-detalhe"><strong>Idade:</strong> {{ jogador.idade }} anos</p>
                 </div>
 
-                <div class="card-acoes-final" style="display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; gap: 8px !important; padding: 15px !important; border-top: 1px solid rgba(0,0,0,0.1) !important; background: none !important; flex-wrap: wrap !important;">
-                    <a href="{% url 'detalhe_jogador' pk=jogador.pk %}" class="btn" style="width: auto !important; min-width: 100px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 35px !important; margin: 0 !important; font-size: 0.75rem !important; border-radius: 6px !important; padding: 0 10px !important; white-space: nowrap !important;">
+                <div class="card-acoes-final">
+                    <button class="btn btn-ajax" data-url="{% url 'jogador_json' jogador.pk %}">
+                        Info Rápida
+                    </button>
+
+                    <a href="{% url 'detalhe_jogador' pk=jogador.pk %}" class="btn btn-detalhes">
                         Detalhes
                     </a>
 
                     {% if jogador.usuario == user %}
-                        <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn" style="width: auto !important; min-width: 70px !important; display: flex !important; align-items: center !important; justify-content: center !important; height: 35px !important; margin: 0 !important; font-size: 0.75rem !important; border-radius: 6px !important; padding: 0 10px !important; white-space: nowrap !important;">
+                        <a href="{% url 'editar_jogador' pk=jogador.pk %}" class="btn btn-edit">
                             Editar
                         </a>
                         
-                        <form action="{% url 'excluir_jogador' pk=jogador.pk %}" method="post" style="margin: 0 !important; padding: 0 !important; background: none !important; box-shadow: none !important; border: none !important; display: inline-block !important;">
+                        <form action="{% url 'excluir_jogador' pk=jogador.pk %}" method="post" class="form-excluir">
                             {% csrf_token %}
-                            <button type="submit" class="btn" onclick="return confirm('Tem certeza?')" style="width: auto !important; min-width: 70px !important; height: 35px !important; border: none !important; margin: 0 !important; padding: 0 10px !important; font-size: 0.75rem !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; border-radius: 6px !important; white-space: nowrap !important;">
+                            <button type="submit" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir?')">
                                 Excluir
                             </button>
                         </form>
                     {% endif %}
                 </div>
-            </div> {% empty %}
+            </div> 
+        {% empty %}
             <p>Nenhum jogador cadastrado ainda.</p>
         {% endfor %}
-    </div> </div> {% endblock %}
+    </div> 
+</div> 
+{% endblock %}
+
+{% block script %}
+<script>
+    const botoesAjax = document.querySelectorAll('.btn-ajax');
+
+    botoesAjax.forEach(botao => {
+        botao.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const painel = document.getElementById('painel-ajax');
+                    const nome = document.getElementById('ajax-nome');
+                    const info = document.getElementById('ajax-info');
+
+                    painel.style.display = 'block';
+                    nome.textContent = data.nome;
+                    info.innerHTML = `<strong>Cidade:</strong> ${data.cidade} | <strong>Nascimento:</strong> ${data.nascimento}`;
+                    
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                })
+                .catch(error => toastr.error("Erro ao carregar dados."));
+        });
+    });
+</script>
+{% endblock %}
