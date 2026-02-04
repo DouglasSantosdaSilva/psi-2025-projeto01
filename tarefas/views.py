@@ -86,7 +86,6 @@ def jogador_json(request, pk):
     try:
         jogador = get_object_or_404(Jogador, pk=pk)
         
-        # Criamos o dicionário manualmente para evitar erro de campos complexos
         data = {
             'nome': jogador.nome,
             'posicao': jogador.posicao,
@@ -97,5 +96,4 @@ def jogador_json(request, pk):
         }
         return JsonResponse(data)
     except Exception as e:
-        # Se der erro, ele retorna o motivo no console do navegador
         return JsonResponse({'error': str(e)}, status=500)

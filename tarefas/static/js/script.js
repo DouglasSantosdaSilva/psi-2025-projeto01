@@ -1,4 +1,4 @@
-// Função para carregar dados do jogador via AJAX
+
 function carregarDetalhesJogador(id, urlBase) {
     const url = `${urlBase}${id}/`;
 
@@ -8,7 +8,6 @@ function carregarDetalhesJogador(id, urlBase) {
             return response.json();
         })
         .then(data => {
-            // Manipulando o DOM para exibir os dados (Aula 13)
             const modalConteudo = document.querySelector('#detalhe-ajax');
             if (modalConteudo) {
                 modalConteudo.innerHTML = `
